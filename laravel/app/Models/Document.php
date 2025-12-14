@@ -11,6 +11,12 @@ class Document extends Model
 
     protected $fillable = ['filename','user_id'];
 
+    public function reportovi(){
+        return $this->hasMany(Report::class);
+    }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     
 }

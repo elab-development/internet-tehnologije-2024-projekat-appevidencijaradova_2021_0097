@@ -9,4 +9,10 @@ class Report extends Model
 {
     /** @use HasFactory<\Database\Factories\ReportFactory> */
     use HasFactory;
+
+    protected $fillable = ['plagPercent','paraphrasePercent','document_id'];
+
+    public function dokumenti(){
+        return $this->belongsTo(Document::class);
+    }
 }
