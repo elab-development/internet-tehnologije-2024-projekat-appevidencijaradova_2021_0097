@@ -12,8 +12,8 @@ const HomePage = () => {
                 <section className="my-4">
                     <div className="row">
                         <div className="col-lg-4 offset-lg-2">
-                            <h2 className="fonr-weight-bold mb-5">Kako funkcioniše</h2>
-                            <p className="text-justify">
+                            <h2 className="fw-bold mb-5">Kako funkcioniše</h2>
+                            <p style={{ textAlign: 'justify' }}>
                                 Naš sistem za proveru plagijarizma koristi
                                 napredne algoritme za upoređivanje studentskih
                                 radova sa obimnom bazom akademskog sadržaja.
@@ -44,8 +44,8 @@ const HomePage = () => {
                             />
                         </div>
                         <div className="col-lg-4">
-                            <h2 className="font-weight-bold mb-5">Sigurno i Pouzdano</h2>
-                            <p className="text-justify">
+                            <h2 className="fw-bold mb-5">Sigurno i Pouzdano</h2>
+                            <p style={{ textAlign: 'justify' }}>
                                 Stavljamo bezbednost i privatnost vaših podataka na prvo mesto.
                                 Naš sistem garantuje da se svi radovi studenata i izveštaji o plagijarizmu
                                 obrađuju s najvećom poverljivošću. Budite sigurni da je integritet akademskog
@@ -58,8 +58,8 @@ const HomePage = () => {
                 <section className="my-4">
                     <div className="row">
                         <div className="col-lg-4 offset-lg-2">
-                            <h2 className="font-weight-bold mb-5">Započnite Danas</h2>
-                            <p className="text-justify">
+                            <h2 className="fw-bold mb-5">Započnite Danas</h2>
+                            <p style={{ textAlign: 'justify' }}>
                                 Implementacija našeg sistema za detekciju plagijarizma je jednostavna.
                                 Prijavite se danas i osnažite vaše edukatore moćnim alatom za
                                 održavanje akademske iskrenosti.
