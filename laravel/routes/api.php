@@ -29,3 +29,24 @@ Route::controller(AuthenticationController::class)->group(function(){
         });
     });
 });
+
+Route::group(['middleware' => ['auth:api', 'role:profesor']],function(){
+    Route::controller(UserController::class)->group(function(){
+        Route::name('user.')->group(function(){
+            Route::get('/users','index')->name('index');
+            Route::get('/user/{id}', 'show')->name('show')->whereNumber('id');
+            Route::post('create-user', 'store')->name('store');
+            Route::put('update-user/{id}', 'update')->name('update');
+            Route::delete('destroy-user/{id}', 'destroy')->name('destroy');
+            Route::get('/export-users', 'exportCsv')->name('export');
+        });
+    });
+
+    Route::resource('documents', DocumentController::class);
+
+    Route::controller(ReportController::class)->group(function(){
+        Route::name('report.')->group(function(){
+            Route::post('check-plagiarism/{file_id}', 'checkPlagiarism')->name('check-plagiarism');
+        });
+    });
+});
