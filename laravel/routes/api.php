@@ -50,3 +50,11 @@ Route::group(['middleware' => ['auth:api', 'role:profesor']],function(){
         });
     });
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::controller(DocumentController::class)->group(function(){
+        Route::name('document.')->group(function(){
+            Route::post('uploadFile', 'uploadFile')->name('uploadFile');
+        });
+    });
+});
