@@ -64,4 +64,11 @@ class AuthenticationController extends Controller
             return response()->json(['message'=>'Unauthorized'],401);
         }
     }
+
+    public function logout(Request $request){
+
+        $request->user()->token()->delete();
+
+        return response()->json(['message' =>'Uspesan logout']);
+    }
 }
