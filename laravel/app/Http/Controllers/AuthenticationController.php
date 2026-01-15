@@ -31,7 +31,7 @@ class AuthenticationController extends Controller
         $tokenResult = $user->createToken('auth_token');
         $token = $tokenResult->accessToken;
 
-        return reponse()->json([
+        return response()->json([
             'data' => $user,
             'access_token' =>$token,
             'token_type' => 'Bearer'
@@ -41,7 +41,7 @@ class AuthenticationController extends Controller
     public function login(Request $request){
 
         if(!Auth::attempt($request->only('email', 'password'))){
-            return response()->json(['success'->false],401);
+            return response()->json(['success'=>false],401);
         }
 
         $user = User::where('email',$request['email'])->firstOrFail();
