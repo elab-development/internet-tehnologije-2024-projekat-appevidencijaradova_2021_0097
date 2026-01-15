@@ -54,3 +54,5 @@ const useApiRequest = (initialData = null) =>{
 
     return {data,error,loading,fetchData};
 };
+
+export default useApiRequest;
