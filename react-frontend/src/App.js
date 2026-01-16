@@ -16,6 +16,8 @@ const App = ({initialToken}) => {
     setToken(null);
     window.localStorage.removeItem("auth_token");
   };
+
+  
   return <HomePage />;
   
 }
