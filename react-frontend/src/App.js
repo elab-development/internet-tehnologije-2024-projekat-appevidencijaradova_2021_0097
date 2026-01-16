@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './App.css';
 import HomePage from './stranice/HomePage';
+import LoginPage from './stranice/LoginPage';
 
 const App = ({initialToken}) => {
 
@@ -18,7 +19,7 @@ const App = ({initialToken}) => {
   };
 
   
-  return <HomePage />;
+  return <LoginPage />;
   
 }
 

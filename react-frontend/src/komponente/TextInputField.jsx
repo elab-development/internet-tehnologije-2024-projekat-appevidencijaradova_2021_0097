@@ -1,6 +1,6 @@
 const TextField = ({type, id, placeholder, name, onInput})=>{
     return(
-        <div>
+        <div className="form-outline mb-4">
             <input 
                 type={type}
                 id={id}
