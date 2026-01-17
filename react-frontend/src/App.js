@@ -3,6 +3,8 @@ import { useState } from 'react';
 import './App.css';
 import HomePage from './stranice/HomePage';
 import LoginPage from './stranice/LoginPage';
+import RegisterPage from './stranice/RegisterPage';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
 
 const App = ({initialToken}) => {
 
@@ -19,7 +21,18 @@ const App = ({initialToken}) => {
   };
 
   
-  return <LoginPage />;
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path = '/' element={<HomePage/>}/>
+          <Route path = '/login' element={<LoginPage addToken={addToken}/>}/>
+          <Route path = '/register' element={<RegisterPage />}/>
+        </Routes>
+      </BrowserRouter>
+
+    </div>
+  );
   
 }
 
