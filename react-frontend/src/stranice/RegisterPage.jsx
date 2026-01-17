@@ -45,7 +45,7 @@ const RegisterPage = ()=>{
                                 type="text"
                                 id="nameRegister"
                                 placeholder="Korisnicko ime"
-                                name="userName"
+                                name="username"
                                 onInput={handleInput}
                             />
 
