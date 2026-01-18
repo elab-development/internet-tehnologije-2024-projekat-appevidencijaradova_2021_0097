@@ -8,6 +8,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import KontaktPage from './stranice/KontaktPage';
 import UsersPage from './stranice/UsersPage';
 import DocumentsPage from './stranice/DocumentsPage';
+import SlanjeFajlova from './stranice/SlanjeFajlova';
 
 const App = ({initialToken}) => {
 
@@ -34,12 +35,12 @@ const App = ({initialToken}) => {
           <Route path = '/contact' element={<KontaktPage />}/>
           <Route path = '/users' element={<UsersPage />}/>
           <Route path = '/documents' element={<DocumentsPage />}/>
+          <Route path = '/upload' element={<SlanjeFajlova />}/>
         </Routes>
       </BrowserRouter>
 
     </div>
   );
-  
 }
 
 export default App;
