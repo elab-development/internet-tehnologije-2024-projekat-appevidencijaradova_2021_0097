@@ -9,6 +9,7 @@ import KontaktPage from './stranice/KontaktPage';
 import UsersPage from './stranice/UsersPage';
 import DocumentsPage from './stranice/DocumentsPage';
 import SlanjeFajlova from './stranice/SlanjeFajlova';
+import NavBar from './komponente/NavBar';
 
 const App = ({initialToken}) => {
 
@@ -28,14 +29,15 @@ const App = ({initialToken}) => {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavBar token = {token} removeToken={removeToken} />
         <Routes>
           <Route path = '/' element={<HomePage/>}/>
           <Route path = '/login' element={<LoginPage addToken={addToken}/>}/>
           <Route path = '/register' element={<RegisterPage />}/>
           <Route path = '/contact' element={<KontaktPage />}/>
-          <Route path = '/users' element={<UsersPage />}/>
-          <Route path = '/documents' element={<DocumentsPage />}/>
-          <Route path = '/upload' element={<SlanjeFajlova />}/>
+          <Route path = '/users' element={<UsersPage authToken={token}/>}/>
+          <Route path = '/documents' element={<DocumentsPage authToken={token}/>}/>
+          <Route path = '/upload' element={<SlanjeFajlova authToken={token}/>}/>
         </Routes>
       </BrowserRouter>
 
