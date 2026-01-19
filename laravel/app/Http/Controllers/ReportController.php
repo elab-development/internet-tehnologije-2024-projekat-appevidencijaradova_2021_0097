@@ -12,6 +12,8 @@ class ReportController extends Controller
 {
     public function checkPlagiarism($file_id)
     {
+        ini_set('max_execution_time', 300); // 300 sekundi = 5 minuta
+
         $apiKey = '68de9c4b705d6c07a4e367296d10c773';
         $strings=DocumentController::file_u_tekst($file_id);
         $dokument = Document::find($file_id);

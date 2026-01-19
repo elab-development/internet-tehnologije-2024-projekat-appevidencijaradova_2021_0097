@@ -146,7 +146,7 @@ const UsersPage = () => {
             const a = document.createElement('a');
             a.href = downloadUrl;
             a.download = 'users.csv';//ime fajla koji preuzimamo
-            document.boddy.appendChild(a);
+            document.body.appendChild(a);
             a.click();
             a.remove();
         })

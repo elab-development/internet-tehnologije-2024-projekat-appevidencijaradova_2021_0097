@@ -103,6 +103,13 @@ class DocumentController extends Controller
         if (!file_exists($filePath)) {
             return response()->json('Data not found', 404);
         }
+
+        $fileExtension = pathinfo($document->filename, PATHINFO_EXTENSION);
+
+        if ($fileExtension !== 'txt') {
+            return response()->json(['error' => 'Only TXT files are supported'], 400);
+        }
+
         $sadrzaj = file_get_contents($filePath);
 
         $rezultati = str_split($sadrzaj, 4500);
