@@ -27,8 +27,8 @@ Route::controller(AuthenticationController::class)->group(function(){
         Route::post('/login','login')->name('login');
         Route::post('/register','register')->name('register');
 
-        route::middleware('auth:api')->group(function(){
-            Route::post('\logout','logout')->name('logout');
+        Route::middleware('auth:api')->group(function(){
+            Route::post('/logout','logout')->name('logout');
         });
     });
 });

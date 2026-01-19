@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "../komponente/Button";
-const token = localStorage.getItem("auth_token");
+
 
 const UsersPage = () => {
 
@@ -50,7 +50,7 @@ const UsersPage = () => {
     //funkcija za azuriranje korisnika
     const handleUpdate = (userId) =>{
         setUpdatingUserId(userId);//uzimamo i postavljamo ID korisnika kog azuriramo
-        const selectedUser = userId.find((user) => user.id === userId);//po ID-u pronalazimo korisnika
+        const selectedUser = users.find((user) => user.id === userId);//po ID-u pronalazimo korisnika
         setUpdateFormData({
             name: selectedUser.name,
             email: selectedUser.email, 
@@ -62,7 +62,7 @@ const UsersPage = () => {
     const handleUpdateFormSubmit = async (e) =>{
         e.preventDefault();//sprecavamo refresh stranice
         try{
-
+            const token = localStorage.getItem("auth_token");
             if(!token){
                 console.error("Nije pronadjen access token");
                 return;
@@ -85,6 +85,11 @@ const UsersPage = () => {
     //funkcija za brisanje korisnika
     const handleDelete = async (userId) =>{
         try{
+            const token = localStorage.getItem("auth_token");
+            if(!token){
+                console.error("Nije pronadjen access token");
+                return;
+            }
             await axios.delete(`/api/destroy-user/${userId}`,{
                 headers:{
                     Authorization: `Bearer ${token}`,
@@ -103,7 +108,7 @@ const UsersPage = () => {
     //switch za sortOption
 
     let filteredAndSortedUsers = users.filter((user)=>
-        user.name.toLowerCase().startWith(searchTerm.trim().toLowerCase())
+        user.name.toLowerCase().startsWith(searchTerm.trim().toLowerCase())
     );
 
     switch(sortOption){
@@ -124,6 +129,11 @@ const UsersPage = () => {
     }
     //handler za eksportovanje
     const handleExport = ()=>{
+        const token = localStorage.getItem("auth_token");
+            if(!token){
+                console.error("Nije pronadjen access token");
+                return;
+            }
         axios.get('/api/export-users',{
             responseType:'blob',
             headers:{

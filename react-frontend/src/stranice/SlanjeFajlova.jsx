@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../komponente/Button";
+import axios from "axios";
 
 const SlanjeFajlova = ({authToken}) =>{
 
@@ -50,14 +52,16 @@ const SlanjeFajlova = ({authToken}) =>{
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-8 col-lg-6 col-xl-4">
+                    <div className="mb-3">
                     {/*input polje za izbor fajla*/}
-                    <label htmlFor="fileInput" className="form-label">Izaberite fajl</label>
+                    <label htmlFor="fileInput" className="form-label mb-3">Izaberite fajl</label>
                     <input 
                         type="file"
                         className="form-control"
                         id="fileInput"
                         onChange={handleFileChange} 
                     />
+                    </div>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-auto">

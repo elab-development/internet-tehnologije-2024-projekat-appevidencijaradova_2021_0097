@@ -1,5 +1,5 @@
 import Button from "../komponente/Button";
-import ReactPaginate from "react-praginate";
+import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { useEffect, useState } from "react";
 

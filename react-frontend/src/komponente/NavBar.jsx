@@ -12,7 +12,7 @@ const NavBar = ({token,removeToken}) => {
         if(token){
             axios.get("api/user", {
                 headers:{
-                    Authorization: 'Bearer'+ token,//postavljanje headera za autorizaciju
+                    Authorization: 'Bearer '+ token,//postavljanje headera za autorizaciju
                 },
             }).then((response) =>{
                 setUserRole(response.data.role);//update user role-a
@@ -46,7 +46,7 @@ const NavBar = ({token,removeToken}) => {
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <a href="/">Pocetna strana</a>
+                <a className="navbar-brand" href="/">Evidencija radova</a>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -62,7 +62,7 @@ const NavBar = ({token,removeToken}) => {
                     <div className="navbar-nav">
                         <NavLink to="/" text="Pocetna" />
                         <NavLink to="/contact" text="Kontakt"/>
-                        {token && <NavLink to="/files" text="Slanje fajlova" />}
+                        {token && <NavLink to="/upload" text="Slanje fajlova" />}
                         {token && userRole ==="profesor" && <NavLink to="/users" text="Studenti" />}
                         {token && userRole ==="profesor" && <NavLink to="/documents" text="Pregled radova" />}
                         {!token ? (
