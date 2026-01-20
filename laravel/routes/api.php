@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +62,6 @@ Route::middleware('auth:api')->group(function () {
         });
     });
 });
+
+Route::post('/contact', [ContactController::class, 'send']);
+

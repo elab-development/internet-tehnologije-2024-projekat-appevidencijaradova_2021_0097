@@ -1,4 +1,32 @@
+import axios from "axios";
+import { useState } from "react";
+
 const KontaktPage = () => {
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+
+        axios.post('/api/contact',{
+            name,
+            email,
+            message
+        })
+        .then(response =>{
+            console.log(response.data);
+            alert("Poruka je poslata");
+            setName("");
+            setEmail("");
+            setMessage("");
+        })
+        .catch(error =>{
+            console.error(error);
+            alert("Greska prilikom slanja poruke");
+        });
+    };
 
     return(
         <div className="container">
@@ -16,18 +44,18 @@ const KontaktPage = () => {
                             Jove Ilica 154, Beograd 11000
                         </p>
 
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label htmlFor="name" className="form-label">Vase ime</label>
-                                <input type="text" className="form-control" id="name" />
+                                <input type="text" className="form-control" id="name" value={name} onChange={(e)=>setName(e.target.value)}/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">Email adresa</label>
-                                <input type="email" className="form-control" id="email" />
+                                <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="message" className="form-label">Poruka</label>
-                                <textarea className="form-control" id="message" rows="4"></textarea>
+                                <textarea className="form-control" id="message" rows="4" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                             </div>
                             <div className="row justify-content-center">
                                 <div className="col-auto">
