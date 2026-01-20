@@ -108,6 +108,7 @@ const UsersPage = () => {
     //switch za sortOption
 
     let filteredAndSortedUsers = users.filter((user)=>
+        user.role !== "profesor" &&
         user.name.toLowerCase().startsWith(searchTerm.trim().toLowerCase())
     );
 
@@ -269,11 +270,12 @@ const UsersPage = () => {
                             />
                         </div>
                     )}
-                </div>
-                <div className="d-flex justufy-content-end mb-2">
-                    <Button className="btn btn-success" onClick={handleExport}>
+                
+                <div className="d-flex justify-content-center mb-2">
+                    <Button className="btn btn-success mt-4" onClick={handleExport}>
                         Oceni studente
                     </Button>
+                </div>
                 </div>
             </div>
         </div>

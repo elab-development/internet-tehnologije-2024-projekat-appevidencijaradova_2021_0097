@@ -2,10 +2,13 @@ import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom";
 import NavLink from "./NavLink";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = ({token,removeToken}) => {
     const [userRole, setUserRole] = useState("");//state za prihavatnje user role a
     const location = useLocation();
+    const navigate = useNavigate();
+    const [username, setUsername] = useState("Guest");
 
     //efekat za dohvatanje uloge kada se promeni token
     useEffect(() =>{
@@ -16,9 +19,14 @@ const NavBar = ({token,removeToken}) => {
                 },
             }).then((response) =>{
                 setUserRole(response.data.role);//update user role-a
+                setUsername(response.data.name);
             }).catch((error) =>{
                 console.log(error);
+                setUsername("Guest");
             });
+        }else{
+            setUserRole("");
+            setUsername("Guest");
         }
     },[token]);
 
@@ -37,6 +45,8 @@ const NavBar = ({token,removeToken}) => {
         axios(config).then(function(response){
             console.log(JSON.stringify(response.data));
             removeToken();
+            setUsername("Guest");
+            navigate("/login");
         }).catch(function(error){
             console.log(error);
         });
@@ -62,7 +72,7 @@ const NavBar = ({token,removeToken}) => {
                     <div className="navbar-nav">
                         <NavLink to="/" text="Pocetna" />
                         <NavLink to="/contact" text="Kontakt"/>
-                        {token && <NavLink to="/upload" text="Slanje fajlova" />}
+                        {token && userRole ==="student" && <NavLink to="/upload" text="Slanje fajlova" />}
                         {token && userRole ==="profesor" && <NavLink to="/users" text="Studenti" />}
                         {token && userRole ==="profesor" && <NavLink to="/documents" text="Pregled radova" />}
                         {!token ? (
@@ -75,6 +85,9 @@ const NavBar = ({token,removeToken}) => {
                         {!token && location.pathname !== "/register" && (
                             <a className="nav-link" href="/register">Register</a>
                         )}
+                    </div>
+                    <div className="navbar-text ms-auto">
+                        {username}
                     </div>
                 </div>
             </div>

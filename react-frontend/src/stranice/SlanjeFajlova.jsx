@@ -54,7 +54,7 @@ const SlanjeFajlova = ({authToken}) =>{
                 <div className="col-md-8 col-lg-6 col-xl-4">
                     <div className="mb-3">
                     {/*input polje za izbor fajla*/}
-                    <label htmlFor="fileInput" className="form-label mb-3">Izaberite fajl</label>
+                    <label htmlFor="fileInput" className="form-label mb-4 fs-4 fw-bold">Izaberite file</label>
                     <input 
                         type="file"
                         className="form-control"

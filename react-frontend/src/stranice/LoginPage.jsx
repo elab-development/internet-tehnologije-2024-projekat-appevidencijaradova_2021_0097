@@ -48,7 +48,7 @@ const LoginPage = ({addToken}) =>{
             <div className="container-fluid h-custom">
                 <div className=" justify-content-center align-items-center h-100">
             
-                    <h3 className="">Molimo unesite vase parametre za logovanje</h3>
+                    <h3 className="mb-5">Molimo unesite vase parametre za logovanje</h3>
                     
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-4">
                         <form onSubmit={handleLogin}>

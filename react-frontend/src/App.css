@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+.pagination {
+    justify-content: center;
+}
+
+/* Razmak samo između dugmeta i brojeva */
+.pagination li:first-child {
+    margin-right: 20px;
+}
+
+.pagination li:last-child {
+    margin-left: 20px;
+}
+
+/* Stil samo za Prethodna i Sledeća */
+.pagination li:first-child a,
+.pagination li:last-child a {
+    color: #fff;                /* beli tekst */
+    font-weight: 700;
+    text-decoration: none;
+    background-color: #0d6efd;  /* bootstrap plava */
+    border: 1px solid #0d6efd;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Hover efekat */
+.pagination li:first-child a:hover,
+.pagination li:last-child a:hover {
+    background-color: #0b5ed7;  /* tamnija plava */
+    color: #fff;
+    text-decoration: none;
+}
+
+
