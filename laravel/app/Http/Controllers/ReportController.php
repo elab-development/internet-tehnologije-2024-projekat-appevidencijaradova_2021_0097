@@ -15,53 +15,81 @@ class ReportController extends Controller
         Log::info("checkPlagiarism je pozvan");
         ini_set('max_execution_time', 300); // 300 sekundi = 5 minuta
 
-        $apiKey = '68de9c4b705d6c07a4e367296d10c773';
+        $apiKey = env('PREPOSTSEO_KEY');
         $strings=DocumentController::file_u_tekst($file_id);
         $dokument = Document::find($file_id);
     
         if (!$dokument) {
             return response()->json(['error' => 'Document not found'], 404);
         }
-    
-        $plagPercentSum=0;
-        $paraphrasePercentSum=0;
-        $broj_elemenata=count($strings);
-        foreach ($strings as $text) {
-            try {
 
-                $response = Http::asForm()->post('https://www.prepostseo.com/apis/checkPlag', [
+        if (empty($strings)) {
+            return response()->json(['error' => 'No text to check'], 400);
+}
+
+
+        $ukupnoReci = 0;
+        $plagPonderisanaSuma =0;
+        $paraphrasePonderisanaSuma=0;
+
+        foreach($strings as $text){
+            try{
+                $brojReci = count(preg_split('/\s+/', trim($text)));
+
+
+                $response = Http::asForm()->post('https://www.prepostseo.com/apis/checkPlag',[
                     'key' => $apiKey,
                     'data' => $text
                 ]);
 
-                Log::info("Prepostseo response status: " . $response->status());
-                Log::info("Prepostseo response body: " . $response->body());
-    
-                $result = json_decode($response->getBody(), true);
+                if($response->failed()){
+                    return response()->json([
+                        'error'=>'Prepostseo API zahtev je pukao',
+                        'status' => $response->status(),
+                        'body' => $response->body()
+                    ],500);
+                }
 
-        
-                $plagPercentSum += $result['plagPercent'];
-                $paraphrasePercentSum += $result['paraphrasePercent'];
-    
-                        
-                
-            } catch (\Exception $e) {
+                $result = $response->json();
 
-                $results[] = ['error' => $e->getMessage()];
+
+                //validacija odgovora
+                if(!isset($result['plagPercent']) || !isset($result['paraphrasePercent'])){
+                    return response()->json([
+                        'error' =>'Invalid API response',
+                        'data' =>$result
+                    ],500);
+                }
+
+                //ponderisani zbir
+                $ukupnoReci += $brojReci;
+                $plagPonderisanaSuma += $result['plagPercent']*$brojReci;
+                $paraphrasePonderisanaSuma += $result['paraphrasePercent']*$brojReci;
+
+            }catch(\Exception $e){
+                return response()->json([
+                    'error' => 'Dogodio se exception',
+                    'poruka' => $e->getMessage()
+                ],500);
             }
         }
-        $rez1=$plagPercentSum/$broj_elemenata;
-        $rez2=$paraphrasePercentSum/$broj_elemenata;
 
-        Report::create([
-            'plagPercent'=>$rez1,
-            'paraphrasePercent'=>$rez2,
-            'document_id'=>$dokument->id
+        if ($ukupnoReci === 0) {
+            return response()->json(['error' => 'No words found in document'], 400);
+        }
+
+
+        $plagPercent = $plagPonderisanaSuma/$ukupnoReci;
+        $paraphrasePercent = $paraphrasePonderisanaSuma/$ukupnoReci;
+
+        $report = Report::create([
+            'plagPercent' =>$plagPercent,
+            'paraphrasePercent'=>$paraphrasePercent,
+            'document_id' => $dokument->id
         ]);
-        return response()->json([
-            'plagPercent'=>$rez1,
-            'paraphrasePercent'=>$rez2,
-            'document_id'=>$dokument->id
-        ]);
+
+        return response()->json($report);
+    
+       
     }
 }

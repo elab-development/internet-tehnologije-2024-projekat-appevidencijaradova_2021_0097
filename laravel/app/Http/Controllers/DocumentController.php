@@ -112,8 +112,28 @@ class DocumentController extends Controller
 
         $sadrzaj = file_get_contents($filePath);
 
-        $rezultati = str_split($sadrzaj, 4500);
+        $reci=preg_split('/\s+/',trim($sadrzaj));
 
-        return $rezultati;
+        $delovi=[];
+        $velicinaDelova = 4900;
+        $trenutniDeo =[];
+
+        foreach($reci as $rec){
+            $trenutniDeo[]=$rec;
+
+            //kada dostignemo limit reci zavrsi deo
+            if(count($trenutniDeo) >= $velicinaDelova){
+                $delovi[] = implode(' ',$trenutniDeo);
+                $trenutniDeo=[];
+            }
+        }
+
+        if(!empty($trenutniDeo)){
+            $delovi[]=implode(' ',$trenutniDeo);
+        }
+
+        //$rezultati = str_split($sadrzaj, 4500);
+
+        return $delovi;
     }
 }
