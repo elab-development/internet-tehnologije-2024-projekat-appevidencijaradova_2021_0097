@@ -39,6 +39,10 @@
 
 .pagination {
     justify-content: center;
+    
+    margin-top: 20px; /* ovo pravi razmak između tabele i paginacije */
+
+
 }
 
 /* Razmak samo između dugmeta i brojeva */

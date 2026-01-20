@@ -99,10 +99,11 @@ const DocumentsPage = () =>{
     );
 
     return(
-        <div className="col-11 mt-5">
-            <h1 className="offset-3">Dokumenti</h1>
+        <div className="container mt-5">
+            
             <div className="row">
-                <div className="col-md-7 offset-3">
+                <div className="col-md-7 mx-auto">
+                    <h1 className="">Dokumenti</h1>
                     <div className="d-flex flex-column align-items-center">
                         <table className="table table-bordered">
                             <thead className="thead-dark">

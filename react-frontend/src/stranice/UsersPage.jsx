@@ -166,10 +166,12 @@ const UsersPage = () => {
 
     return(
         <div className="container mt-5">
-            <h1 className="offset-3">Korisnici</h1>
+            
             <div className="row">
-                <div className="col-md-7 offset-3">
+                <div className="col-md-7 mx-auto">
+                    <h1 className="">Studenti</h1>
                     <div className="col-md-12 d-flex justify-content-between">
+                        
                         <div className="col-md-7">
                             <input 
                                 type="text"

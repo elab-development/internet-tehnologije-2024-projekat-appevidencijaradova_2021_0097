@@ -12,6 +12,7 @@ class ReportController extends Controller
 {
     public function checkPlagiarism($file_id)
     {
+        Log::info("checkPlagiarism je pozvan");
         ini_set('max_execution_time', 300); // 300 sekundi = 5 minuta
 
         $apiKey = '68de9c4b705d6c07a4e367296d10c773';
@@ -32,6 +33,9 @@ class ReportController extends Controller
                     'key' => $apiKey,
                     'data' => $text
                 ]);
+
+                Log::info("Prepostseo response status: " . $response->status());
+                Log::info("Prepostseo response body: " . $response->body());
     
                 $result = json_decode($response->getBody(), true);
 
