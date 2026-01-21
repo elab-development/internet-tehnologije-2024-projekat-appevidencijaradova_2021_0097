@@ -37,7 +37,7 @@ const RegisterPage = ()=>{
             <div className="container-fluid h-custom">
                 <div className="justify-content-center align-items-center h-100">
 
-                    <h3 className="mb-5">Molimo unesite vase parametre za registraciju</h3>
+                    <h1 className="mb-5">Molimo unesite vase parametre za registraciju</h1>
 
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-4">
                         <form onSubmit={handleRegister}>
@@ -76,7 +76,7 @@ const RegisterPage = ()=>{
                                         {loading ? 'Registracija u toku...' : 'Registracija'}
                                     </Button>
                                     {error && <p className="text-danger">Error: {error}</p>}
-                                    <p className="small fw-bold mt-2 pt-1 mb-0">
+                                    <p className="fs-5 fw-bold mt-2 pt-1 mb-0">
                                         Imate nalog? <a href="/login" className="link-danger">Prijava</a>
                                     </p>
                                 </div>

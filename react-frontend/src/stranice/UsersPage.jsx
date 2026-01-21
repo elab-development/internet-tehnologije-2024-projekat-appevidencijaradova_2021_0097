@@ -20,6 +20,15 @@ const UsersPage = () => {
     const[currentPage, setCurrentPage] = useState(0);//state za trenutnu stranicu za paginaciju
     const[usersPerPage] = useState(5);//state za broj korisnika po stranici
 
+    const fillEmptyRows = (items, perPage) => {
+        const filled = [...items];
+        while (filled.length < perPage) {
+            filled.push(null);
+        }
+        return filled;
+    };
+
+
     useEffect(() => {
         fetchUsers();//poziva funkciju koja dohvata korisnike pri montiranju komponente
     },[]);
@@ -156,10 +165,11 @@ const UsersPage = () => {
 
     const indexOfLastUser = (currentPage+1) * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = filteredAndSortedUsers.slice(
-        indexOfFirstUser,
-        indexOfLastUser
+    const currentUsers = fillEmptyRows(
+        filteredAndSortedUsers.slice(indexOfFirstUser, indexOfLastUser),
+        usersPerPage
     );
+
     //izracunavanje indeksa za trenutnu stranicu + dohvatanje korisnika za nju
 
 
@@ -169,7 +179,7 @@ const UsersPage = () => {
             
             <div className="row">
                 <div className="col-md-7 mx-auto">
-                    <h1 className="">Studenti</h1>
+                    <h1 className="mb-5 fw-bold">Studenti</h1>
                     <div className="col-md-12 d-flex justify-content-between">
                         
                         <div className="col-md-7">
@@ -217,9 +227,19 @@ const UsersPage = () => {
                             />
                             <Button
                                 type="submit"
-                                className ="btn btn-success py-1">
+                                className ="btn btn-primary py-1 mt-3">
                                 Sacuvaj promene
                             </Button>
+                            <div className="mt-3">
+                                <Button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={()=>{
+                                        setUpdatingUserId(null);
+                                        setUpdateFormData({name:"",email:""});
+                                    }}
+                                >Odustani</Button>
+                            </div>
                         </form>
                     ):(
                         <div className="d-flex flex-column align-items-center">
@@ -234,26 +254,33 @@ const UsersPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {currentUsers.map((user)=>(
-                                        <tr key={user.id}>
-                                            <td className="align-middle">{user.id}</td>
-                                            <td className="align-middle">{user.name}</td>
-                                            <td className="align-middle">{user.email}</td>
-                                            <td className="align-middle">
-                                                <Button
-                                                className="btn btn-warning py-1"
-                                                onClick={() => handleUpdate(user.id)}
-                                                >Azuriraj
-                                                </Button>
-                                            </td>
-                                            <td className="align-middle">
-                                                <Button
-                                                    className="btn btn-danger py-1"
-                                                    onClick={() => handleDelete(user.id)}
-                                                >
-                                                    Obrisi
-                                                </Button>
-                                            </td>
+                                    {currentUsers.map((user, index)=>(
+                                        <tr key={user ? user.id : "empty-" + index}>
+                                            {user ? (
+                                                <>
+                                                    <td className="align-middle">{user.id}</td>
+                                                    <td className="align-middle">{user.name}</td>
+                                                    <td className="align-middle">{user.email}</td>
+                                                    <td className="align-middle">
+                                                        <Button className="btn btn-warning py-1" onClick={() => handleUpdate(user.id)}>
+                                                            Azuriraj
+                                                        </Button>
+                                                    </td>
+                                                    <td className="align-middle">
+                                                        <Button className="btn btn-danger py-1" onClick={() => handleDelete(user.id)}>
+                                                            Obrisi
+                                                        </Button>
+                                                    </td>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <td className="align-middle">&nbsp;</td>
+                                                    <td className="align-middle">&nbsp;</td>
+                                                    <td className="align-middle">&nbsp;</td>
+                                                    <td className="align-middle">&nbsp;</td>
+                                                    <td className="align-middle">&nbsp;</td>
+                                                </>
+                                            )}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -270,14 +297,14 @@ const UsersPage = () => {
                                 subContainerClassName={"pages pagination"}
                                 activeClassName={"active"}
                             />
+
+                            <div className="d-flex justify-content-center mb-2">
+                                <Button className="btn btn-success mt-4" onClick={handleExport}>
+                                    Oceni studente
+                                </Button>
+                            </div>
                         </div>
-                    )}
-                
-                <div className="d-flex justify-content-center mb-2">
-                    <Button className="btn btn-success mt-4" onClick={handleExport}>
-                        Oceni studente
-                    </Button>
-                </div>
+                    )}           
                 </div>
             </div>
         </div>

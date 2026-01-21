@@ -31,7 +31,7 @@ const KontaktPage = () => {
     return(
         <div className="container">
             <header className="text-center mt-5">
-                <h1 className="display-4">Kontaktirajte nas</h1>
+                <h1 className="display-4 fw-bold">Kontaktirajte nas</h1>
                 <p className="lead">Obratite nam se za sva pitanja ili pomoc</p>
             </header>
 

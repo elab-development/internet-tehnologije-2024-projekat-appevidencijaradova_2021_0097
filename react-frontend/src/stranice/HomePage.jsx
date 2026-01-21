@@ -3,7 +3,7 @@ const HomePage = () => {
         <div className="container-sm d-flex align-items-center justify-content-center min-vh-100">
             <div className="text-center">
                 <header className="mt-5">
-                    <h1 className="display-4">Aplikacija za proveru plagijarizma</h1>
+                    <h1 className="display-4 fw-bold">Aplikacija za proveru plagijarizma</h1>
                     <p className="lead mb-5">Dobrodošli na aplikaciju namenjenu edukatorima i
                         institucijama za osiguranje integriteta akademskih
                         ocena

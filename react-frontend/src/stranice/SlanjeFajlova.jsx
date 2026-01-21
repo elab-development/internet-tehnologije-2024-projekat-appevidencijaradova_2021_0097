@@ -54,10 +54,10 @@ const SlanjeFajlova = ({authToken}) =>{
                 <div className="col-md-8 col-lg-6 col-xl-4">
                     <div className="mb-3">
                     {/*input polje za izbor fajla*/}
-                    <label htmlFor="fileInput" className="form-label mb-4 fs-4 fw-bold">Izaberite file</label>
+                    <label htmlFor="fileInput" className="form-label mb-4 fs-3 fw-bold">Izaberite file koji zelite da upload-ujete</label>
                     <input 
                         type="file"
-                        className="form-control"
+                        className="form-control form-control-lg"
                         id="fileInput"
                         onChange={handleFileChange} 
                     />
@@ -65,8 +65,8 @@ const SlanjeFajlova = ({authToken}) =>{
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-auto">
-                        <Button className="btn btn-primary" onClick={handleUpload}>
-                            <p className="m-0">Posalji</p>
+                        <Button className="btn btn-primary btn-lg" onClick={handleUpload}>
+                            Upload
                         </Button>
                     </div>
                 </div>
