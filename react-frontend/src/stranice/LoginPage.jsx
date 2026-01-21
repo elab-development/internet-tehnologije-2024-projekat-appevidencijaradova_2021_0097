@@ -77,7 +77,7 @@ const LoginPage = ({addToken}) =>{
                                     >
                                         Prijava
                                     </Button>
-                                    <p className="fs-5 fw-bold mt-2 pt-1 mb-0">
+                                    <p className="fs-6 fw-bold mt-2 pt-1 mb-0">
                                         Nemate nalog?{"   "}
                                         <a href="/register" className="link-danger">  Registracija</a>
                                     </p>

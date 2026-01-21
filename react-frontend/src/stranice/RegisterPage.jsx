@@ -76,7 +76,7 @@ const RegisterPage = ()=>{
                                         {loading ? 'Registracija u toku...' : 'Registracija'}
                                     </Button>
                                     {error && <p className="text-danger">Error: {error}</p>}
-                                    <p className="fs-5 fw-bold mt-2 pt-1 mb-0">
+                                    <p className="fs-6 fw-bold mt-2 pt-1 mb-0">
                                         Imate nalog? <a href="/login" className="link-danger">Prijava</a>
                                     </p>
                                 </div>
