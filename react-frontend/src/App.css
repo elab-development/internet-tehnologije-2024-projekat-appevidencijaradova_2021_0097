@@ -87,17 +87,18 @@
 
 .dugme{
   width: auto;
+  
 }
 
 .table td button {
-    width: 100%;
+    width: 95%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.85rem;
 }
 
-.table td,
-.table th {
+.table td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
