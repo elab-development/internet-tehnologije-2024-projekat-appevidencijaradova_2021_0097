@@ -13,7 +13,7 @@ class ReportController extends Controller
     public function checkPlagiarism($file_id)
     {
         Log::info("checkPlagiarism je pozvan");
-        ini_set('max_execution_time', 300); // 300 sekundi = 5 minuta
+        
 
         $apiKey = env('PREPOSTSEO_KEY');
         $strings=DocumentController::file_u_tekst($file_id);
@@ -25,12 +25,12 @@ class ReportController extends Controller
 
         if (empty($strings)) {
             return response()->json(['error' => 'No text to check'], 400);
-}
+        }
 
 
         $ukupnoReci = 0;
         $plagPonderisanaSuma =0;
-        $paraphrasePonderisanaSuma=0;
+        $uniquePonderisanaSuma=0;
 
         foreach($strings as $text){
             try{
@@ -42,35 +42,26 @@ class ReportController extends Controller
                     'data' => $text
                 ]);
 
-                if($response->failed()){
-                    return response()->json([
-                        'error'=>'Prepostseo API zahtev je pukao',
-                        'status' => $response->status(),
-                        'body' => $response->body()
-                    ],500);
-                }
+                
 
                 $result = $response->json();
 
-
-                //validacija odgovora
-                if(!isset($result['plagPercent']) || !isset($result['paraphrasePercent'])){
-                    return response()->json([
-                        'error' =>'Invalid API response',
-                        'data' =>$result
-                    ],500);
-                }
+                Log::info('Prepostseo API response', [
+                        'file_id' => $file_id,
+                        'word_count' => $brojReci,
+                        'response' => $result
+                    ]);
 
                 //ponderisani zbir
                 $ukupnoReci += $brojReci;
-                $plagPonderisanaSuma += $result['plagPercent']*$brojReci;
-                $paraphrasePonderisanaSuma += $result['paraphrasePercent']*$brojReci;
+
+                $plag = $result['plagPercent'] ?? 0;
+                $unique = $result['uniquePercent'] ?? 0;
+                $plagPonderisanaSuma += $plag*$brojReci;
+                $uniquePonderisanaSuma += $unique*$brojReci;
 
             }catch(\Exception $e){
-                return response()->json([
-                    'error' => 'Dogodio se exception',
-                    'poruka' => $e->getMessage()
-                ],500);
+                $results[]=['error' =>$e->getMessage()];
             }
         }
 
@@ -80,11 +71,11 @@ class ReportController extends Controller
 
 
         $plagPercent = $plagPonderisanaSuma/$ukupnoReci;
-        $paraphrasePercent = $paraphrasePonderisanaSuma/$ukupnoReci;
+        $uniquePercent = $uniquePonderisanaSuma/$ukupnoReci;
 
         $report = Report::create([
             'plagPercent' =>$plagPercent,
-            'paraphrasePercent'=>$paraphrasePercent,
+            'uniquePercent'=>$uniquePercent,
             'document_id' => $dokument->id
         ]);
 
