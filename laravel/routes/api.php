@@ -59,6 +59,7 @@ Route::middleware('auth:api')->group(function () {
     Route::controller(DocumentController::class)->group(function(){
         Route::name('document.')->group(function(){
             Route::post('uploadFile', 'uploadFile')->name('uploadFile');
+            Route::get('documents-user','documentsUsera')->name('documentsUsera');
         });
     });
 });

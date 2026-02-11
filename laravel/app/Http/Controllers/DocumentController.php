@@ -136,4 +136,14 @@ class DocumentController extends Controller
 
         return $delovi;
     }
+
+    public function documentsUsera(){
+        $user = Auth::user();
+
+        $documentsUsera = Document::with('reportovi')
+            ->where('user_id',$user->id)
+            ->get();
+        
+        return response()->json($documentsUsera);
+    }
 }
