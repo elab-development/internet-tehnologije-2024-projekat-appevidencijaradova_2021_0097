@@ -10,6 +10,7 @@ import UsersPage from './stranice/UsersPage';
 import DocumentsPage from './stranice/DocumentsPage';
 import SlanjeFajlova from './stranice/SlanjeFajlova';
 import NavBar from './komponente/NavBar';
+import StudentPregled from './stranice/StudentPregled';
 
 const App = ({initialToken}) => {
 
@@ -38,6 +39,7 @@ const App = ({initialToken}) => {
           <Route path = '/users' element={<UsersPage authToken={token}/>}/>
           <Route path = '/documents' element={<DocumentsPage authToken={token}/>}/>
           <Route path = '/upload' element={<SlanjeFajlova authToken={token}/>}/>
+          <Route path = '/pregled' element={<StudentPregled authToken={token}/>}/>
         </Routes>
       </BrowserRouter>
 
