@@ -291,7 +291,7 @@ const UsersPage = () => {
                                 breakLabel={"..."}
                                 pageCount={Math.ceil(filteredAndSortedUsers.length / usersPerPage)}
                                 marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
+                                pageRangeDisplayed={3}
                                 onPageChange={handlePageClick}
                                 containerClassName={"pagination"}
                                 subContainerClassName={"pages pagination"}

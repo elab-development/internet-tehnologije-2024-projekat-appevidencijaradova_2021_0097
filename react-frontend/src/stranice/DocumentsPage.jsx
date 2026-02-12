@@ -79,6 +79,8 @@ const DocumentsPage = () => {
         setCurrentPage(event.selected);//postavlja trenutnu stranicu na izabranu
     };
 
+    
+
     const indexOfLastDocument = (currentPage + 1) * documentsPerPage;
     const indexOfFirstDocument = indexOfLastDocument - documentsPerPage;
 
@@ -145,7 +147,7 @@ const DocumentsPage = () => {
                             breakLabel={"..."}
                             pageCount={Math.ceil(documents.length / documentsPerPage)}
                             marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
+                            pageRangeDisplayed={3}
                             onPageChange={handlePageClick}
                             containerClassName={"pagination"}
                             subContainerClassName={"pages pagination"}

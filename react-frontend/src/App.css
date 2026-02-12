@@ -109,5 +109,9 @@
     font-size: 1.05rem;
 }
 
+.table th{
+  white-space: normal;
+  word-break: break-word;
+}
 
 
