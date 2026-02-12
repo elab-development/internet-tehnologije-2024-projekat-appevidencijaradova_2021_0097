@@ -73,6 +73,7 @@ const NavBar = ({token,removeToken}) => {
                         <NavLink to="/" text="Pocetna" />
                         <NavLink to="/contact" text="Kontakt"/>
                         {token && userRole ==="student" && <NavLink to="/upload" text="Slanje fajlova" />}
+                        {token && userRole ==="student" && <NavLink to="/pregled" text="Pregled dokumenata" />}
                         {token && userRole ==="profesor" && <NavLink to="/users" text="Studenti" />}
                         {token && userRole ==="profesor" && <NavLink to="/documents" text="Dokumenti" />}
                         {!token ? (
