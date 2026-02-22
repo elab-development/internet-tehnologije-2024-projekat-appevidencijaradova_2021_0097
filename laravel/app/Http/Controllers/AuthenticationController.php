@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
 {
+   
     public function register(Request $request){
 
         $validator = Validator::make($request->all(), [
